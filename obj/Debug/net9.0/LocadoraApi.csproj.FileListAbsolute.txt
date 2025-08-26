@@ -32,3 +32,4 @@ C:\Users\Marceloo\Desktop\Work\Desafio\LocadoraApi\obj\Debug\net9.0\refint\Locad
 C:\Users\Marceloo\Desktop\Work\Desafio\LocadoraApi\obj\Debug\net9.0\LocadoraApi.pdb
 C:\Users\Marceloo\Desktop\Work\Desafio\LocadoraApi\obj\Debug\net9.0\LocadoraApi.genruntimeconfig.cache
 C:\Users\Marceloo\Desktop\Work\Desafio\LocadoraApi\obj\Debug\net9.0\ref\LocadoraApi.dll
+C:\Users\Marceloo\Desktop\Work\Desafio\LocadoraApi\obj\Debug\net9.0\LocadoraApi.sourcelink.json

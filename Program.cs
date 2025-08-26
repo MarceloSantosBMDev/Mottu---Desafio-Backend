@@ -4,29 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-// =============================
-// SETUP THE APPLICATION
-// =============================
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add Swagger/OpenAPI support for easy testing
+// add swagger para testes
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Enable Swagger UI only in Development
+// swagger para desenvolvimento
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Force HTTPS redirection
+// https
 app.UseHttpsRedirection();
 
 // =============================
-// IN-MEMORY DATA STORAGE
+// código armazenado em listas, mémoria
 // =============================
 var motorcycles = new List<Motorcycle>();
 var deliveryDrivers = new List<DeliveryDriver>();
@@ -34,7 +32,7 @@ var rentals = new List<Rental>();
 var notifications = new List<Notification>();
 
 // =============================
-// MOTORCYCLE CRUD
+// crud da moto
 // =============================
 app.MapPost("/motorcycles", (MotorcycleRequest request) =>
 {
@@ -86,7 +84,7 @@ app.MapPut("/motorcycles/{id}", (string id, MotorcycleRequest request) =>
     if (motorcycle == null)
         return Results.NotFound();
 
-    // Prevent duplicate license plates
+    // previni 2 placas iguais
     if (motorcycles.Any(m => m.LicensePlate.Equals(request.LicensePlate, StringComparison.OrdinalIgnoreCase) && m.Id != id))
         return Results.Conflict("License plate already exists");
 
@@ -112,7 +110,7 @@ app.MapDelete("/motorcycles/{id}", (string id) =>
 });
 
 // =============================
-// DELIVERY DRIVER CRUD
+// crud entregador
 // =============================
 app.MapPost("/drivers", (DriverRequest request) =>
 {
@@ -183,7 +181,7 @@ app.MapDelete("/drivers/{id}", (string id) =>
 });
 
 // =============================
-// RENTAL CRUD
+// crud do aluguel
 // =============================
 app.MapPost("/rentals", (RentalRequest request) =>
 {
@@ -278,7 +276,7 @@ app.MapPost("/rentals/{id}/return", (string id, ReturnRequest request) =>
 });
 
 // =============================
-// NOTIFICATIONS
+// notificacao
 // =============================
 app.MapGet("/notifications", () => Results.Ok(notifications));
 
@@ -290,7 +288,7 @@ app.MapGet("/health", () => Results.Ok("API is running!"));
 app.Run();
 
 // =============================
-// DATA MODELS
+// classes 
 // =============================
 public record MotorcycleRequest(string Id, int Year, string Model, string LicensePlate);
 public record DriverRequest(string Id, string Name, string Cnpj, DateTime BirthDate, string DriverLicenseNumber, string DriverLicenseType);
